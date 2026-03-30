@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>JastipUnnes — Dokumentasi & Informasi Layanan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+<style>
+  :root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray-100: #F6F6F6;
+    --gray-200: #EBEBEB;
+    --gray-300: #D4D4D4;
+    --gray-400: #9A9A9A;
+    --gray-500: #6B6B6B;
+    --gray-600: #3D3D3D;
+    --gray-700: #2A2A2A;
+    --gray-800: #1A1A1A;
+    --gray-900: #111111;
+    --green: #06C167;
+    --green-dark: #048A48;
+    --red: #EE2434;
+    --amber: #F5A524;
+    --font: 'DM Sans', sans-serif;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 100px;
+    --topbar-h: 60px;
+    --sidebar-w: 260px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--gray-100);
+    color: var(--black);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--green-dark); text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
+
+  /* ─── TOPBAR ─── */
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: var(--black);
+    padding: 0 20px; height: var(--topbar-h);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .top-bar-brand {
+    font-size: 22px; font-weight: 800;
+    color: var(--white); letter-spacing: -1px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .top-bar-brand span { color: var(--green); }
+  .top-bar-brand .material-symbols-outlined { color: var(--green); font-size: 26px; }
+  
+  .top-bar-actions { display: flex; align-items: center; gap: 12px; }
+  .badge-beta {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    background: var(--white); color: var(--black);
+    padding: 4px 10px; border-radius: var(--radius-full);
+    letter-spacing: 0.04em;
+  }
+
+  .hamburger {
+    display: none; background: none; border: none;
+    color: var(--white); cursor: pointer; padding: 4px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .layout { display: flex; padding-top: var(--topbar-h); }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: var(--sidebar-w); flex-shrink: 0;
+    position: fixed; top: var(--topbar-h); left: 0; bottom: 0;
+    overflow-y: auto; background: var(--white);
+    border-right: 1.5px solid var(--gray-200);
+    padding: 24px 16px; transition: transform 0.3s ease; z-index: 150;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 2px; }
+
+  .sidebar-section { margin-bottom: 24px; }
+  .sidebar-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--gray-400); padding: 0 12px 8px;
+  }
+  .sidebar-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; cursor: pointer; border: none; background: none;
+    font-size: 14px; font-weight: 600; color: var(--gray-500);
+    border-radius: var(--radius-md); width: 100%; text-align: left;
+    font-family: var(--font); transition: all 0.15s;
+  }
+  .sidebar-item:hover { background: var(--gray-100); color: var(--black); }
+  .sidebar-item.active { background: var(--black); color: var(--white); }
+  .sidebar-item .material-symbols-outlined { font-size: 18px; }
+
+  .sidebar-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5); z-index: 140; backdrop-filter: blur(2px);
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .main {
+    margin-left: var(--sidebar-w); flex: 1;
+    max-width: 900px; padding: 48px;
+  }
+
+  /* ─── TYPOGRAPHY & SECTIONS ─── */
+  .doc-section { margin-bottom: 64px; scroll-margin-top: 80px; }
+  
+  .sec-label {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--gray-500); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .sec-title {
+    font-size: 32px; font-weight: 800; color: var(--black);
+    letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 12px;
+  }
+  .sec-desc { font-size: 15px; font-weight: 500; color: var(--gray-600); line-height: 1.6; margin-bottom: 24px; }
+
+  /* ─── BUTTONS ─── */
+  .btn-primary, .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 24px; border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 15px; font-weight: 700;
+    cursor: pointer; border: none; text-decoration: none; transition: all 0.15s;
+    letter-spacing: -0.01em;
+  }
+  .btn-primary { background: var(--black); color: var(--white); }
+  .btn-primary:hover { background: var(--gray-800); text-decoration: none; }
+  .btn-secondary { background: var(--white); color: var(--black); border: 1.5px solid var(--gray-200); }
+  .btn-secondary:hover { background: var(--gray-100); text-decoration: none; }
+  .btn-green { background: var(--green); color: var(--black); }
+  .btn-green:hover { background: var(--green-dark); color: var(--white); text-decoration: none; }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--white); border-radius: var(--radius-lg);
+    padding: 24px; border: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06); margin-bottom: 16px;
+  }
+
+  /* ─── HERO ─── */
+  .hero-eyebrow {
+    display: inline-flex; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    background: var(--gray-200); color: var(--gray-600);
+    padding: 6px 14px; border-radius: var(--radius-full); margin-bottom: 20px;
+  }
+  .hero-title {
+    font-size: clamp(36px, 5vw, 56px); font-weight: 800;
+    letter-spacing: -1.5px; color: var(--black); line-height: 1.1; margin-bottom: 16px;
+  }
+  .hero-desc {
+    font-size: 18px; font-weight: 500; color: var(--gray-500);
+    max-width: 600px; line-height: 1.6; margin-bottom: 32px;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* ─── GRID CARDS ─── */
+  .grid-2, .grid-3 { display: grid; gap: 16px; margin: 24px 0; }
+  .grid-2 { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  
+  .feature-card {
+    background: var(--white); border-radius: var(--radius-lg); padding: 24px;
+    border: 1.5px solid var(--gray-200); transition: border-color 0.15s;
+  }
+  .feature-card:hover { border-color: var(--black); }
+  .icon-wrap {
+    width: 44px; height: 44px; border-radius: var(--radius-md);
+    background: var(--gray-100); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; color: var(--black);
+  }
+  .icon-wrap.green { background: #DCFCE7; color: var(--green-dark); }
+  .feature-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 8px; letter-spacing: -0.3px; }
+  .feature-desc { font-size: 14px; font-weight: 500; color: var(--gray-500); line-height: 1.5; }
+
+  /* ─── NOTICES ─── */
+  .notice-card {
+    background: #FFF9E6; border-left: 3px solid var(--amber);
+    padding: 16px; border-radius: var(--radius-sm);
+    margin: 20px 0; font-size: 14px; line-height: 1.6;
+    color: #7A5500; font-weight: 500; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .notice-card .material-symbols-outlined { color: var(--amber); }
+  
+  .notice-green { background: #F0FDF4; border-color: var(--green); color: #166534; }
+  .notice-green .material-symbols-outlined { color: var(--green-dark); }
+
+  .notice-red { background: #FEF2F2; border-color: var(--red); color: #991B1B; }
+  .notice-red .material-symbols-outlined { color: var(--red); }
+
+  /* ─── VERTICAL TIMELINE (APP STYLE) ─── */
+  .timeline { margin: 24px 0; padding-left: 8px; }
+  .step-item { display: flex; gap: 20px; position: relative; padding-bottom: 32px; }
+  .step-item::before {
+    content: ''; position: absolute; left: 15px; top: 32px; bottom: 0;
+    width: 2px; background: var(--gray-200); z-index: 1;
+  }
+  .step-item:last-child::before { display: none; }
+  .step-item:last-child { padding-bottom: 0; }
+  
+  .step-dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--black); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 14px; z-index: 2; position: relative; flex-shrink: 0;
+  }
+  .step-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+  .step-desc { font-size: 14px; font-weight: 500; color: var(--gray-500); line-height: 1.5; }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1.5px solid var(--gray-200); }
+  .compare-table { width: 100%; border-collapse: collapse; min-width: 600px; background: var(--white); }
+  .compare-table th {
+    padding: 16px; text-align: left; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400);
+    border-bottom: 1.5px solid var(--gray-200); background: var(--gray-100);
+  }
+  .compare-table td { padding: 16px; border-bottom: 1px solid var(--gray-200); font-size: 14px; font-weight: 600; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .col-bad { color: var(--red); }
+  .col-good { color: var(--green-dark); }
+  .col-name { color: var(--black); }
+
+  /* ─── APP DOWNLOAD ─── */
+  .app-download {
+    display: flex; align-items: center; gap: 24px;
+    background: var(--white); border-radius: var(--radius-lg);
+    padding: 24px; border: 1.5px solid var(--gray-200); margin-bottom: 24px;
+  }
+  .app-qr { width: 80px; height: 80px; background: var(--gray-100); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; }
+  .app-qr .material-symbols-outlined { font-size: 36px; color: var(--black); }
+
+  /* ─── FAQ ─── */
+  .faq-item { border-bottom: 1.5px solid var(--gray-200); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; cursor: pointer; font-size: 16px; font-weight: 700; color: var(--black);
+  }
+  .faq-q .material-symbols-outlined { color: var(--gray-400); transition: transform 0.2s; }
+  .faq-a {
+    font-size: 15px; font-weight: 500; color: var(--gray-500); line-height: 1.6;
+    padding-bottom: 20px; display: none;
+  }
+  .faq-item.open .faq-q .material-symbols-outlined { transform: rotate(180deg); color: var(--black); }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    border-top: 1.5px solid var(--gray-200); padding: 40px 48px;
+    margin-left: var(--sidebar-w); background: var(--white);
+    display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center;
+  }
+  .footer-brand { font-size: 18px; font-weight: 800; color: var(--black); letter-spacing: -0.5px; }
+  .footer-copy { font-size: 13px; font-weight: 500; color: var(--gray-400); margin-top: 4px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-overlay.open { display: block; }
+    .hamburger { display: block; }
+    .main { margin-left: 0; padding: 32px 24px 80px; }
+    .footer { margin-left: 0; padding: 32px 24px; }
+    .hero-title { font-size: 32px; }
+    .app-download { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .hero-actions { flex-direction: column; width: 100%; }
+    .btn-primary, .btn-secondary, .btn-green { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top-bar">
+  <div style="display:flex; align-items:center; gap:16px;">
+    <button class="hamburger" id="hamburger"><span class="material-symbols-outlined">menu</span></button>
+    <div class="top-bar-brand"><span class="material-symbols-outlined">local_shipping</span> Jastip<span>Unnes</span></div>
+  </div>
+  <div class="top-bar-actions">
+    <span class="badge-beta">Beta Platform</span>
+  </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Mulai</div>
+    <button class="sidebar-item active" data-target="hero"><span class="material-symbols-outlined">home</span> Beranda</button>
+    <button class="sidebar-item" data-target="tentang"><span class="material-symbols-outlined">info</span> Apa itu JastipUnnes?</button>
+    <button class="sidebar-item" data-target="download"><span class="material-symbols-outlined">download</span> Download Aplikasi</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Mengapa Kami</div>
+    <button class="sidebar-item" data-target="masalah"><span class="material-symbols-outlined">warning</span> Masalah Delivery Umum</button>
+    <button class="sidebar-item" data-target="solusi"><span class="material-symbols-outlined">verified</span> Solusi Kami</button>
+    <button class="sidebar-item" data-target="perbandingan"><span class="material-symbols-outlined">compare_arrows</span> Perbandingan Biaya</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Layanan</div>
+    <button class="sidebar-item" data-target="layanan"><span class="material-symbols-outlined">category</span> Jenis Layanan</button>
+    <button class="sidebar-item" data-target="cara-pesan"><span class="material-symbols-outlined">list_alt</span> Cara Memesan</button>
+    <button class="sidebar-item" data-target="operasional"><span class="material-symbols-outlined">schedule</span> Info Operasional</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Kemitraan</div>
+    <button class="sidebar-item" data-target="driver"><span class="material-symbols-outlined">two_wheeler</span> Jadi Driver</button>
+    <button class="sidebar-item" data-target="nonprofit"><span class="material-symbols-outlined">volunteer_activism</span> Proyek Non-Profit</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Pusat Bantuan</div>
+    <button class="sidebar-item" data-target="faq"><span class="material-symbols-outlined">help</span> FAQ</button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <section class="doc-section" id="hero">
+    <div class="hero-eyebrow">Pengiriman & Titipan · Semarang</div>
+    <h1 class="hero-title">Layanan Jastip Jujur & Adil untuk Semua</h1>
+    <p class="hero-desc">Platform pengiriman dan jasa titip berbasis komunitas untuk mahasiswa UNNES. Harga transparan, driver sejahtera — tanpa biaya atau markup tersembunyi.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('download').scrollIntoView();"><span class="material-symbols-outlined">download</span> Download Aplikasi</button>
+      <button class="btn-secondary" onclick="document.getElementById('masalah').scrollIntoView();">Lihat Perbedaan</button>
+    </div>
+  </section>
+
+  <section class="doc-section" id="tentang">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">info</span> Tentang Platform</div>
+    <h2 class="sec-title">Mengenal JastipUnnes</h2>
+    <p class="sec-desc">Aplikasi jasa titip dan pengiriman lokal yang dibangun khusus untuk komunitas mahasiswa Universitas Negeri Semarang (UNNES) dan area Semarang.</p>
+
+    <div class="grid-2">
+      <div class="feature-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">storefront</span></div>
+        <div class="feature-title">Jastip Resto / Toko</div>
+        <div class="feature-desc">Pesan makanan atau titip belikan barang dari toko mana saja, driver kami bantu membelikan dan mengantar langsung ke tangan Anda.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">home_pin</span></div>
+        <div class="feature-title">Ambil Instan</div>
+        <div class="feature-desc">Barang Anda sudah lunas tapi tidak sempat ambil? Kami jemput dan antarkan langsung ke kos atau kampusmu.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">local_shipping</span></div>
+        <div class="feature-title">Kirim Instan</div>
+        <div class="feature-desc">Kirim barang atau dokumen langsung dari lokasimu ke penerima tujuan yang Anda tentukan di wilayah layanan kami.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon-wrap green"><span class="material-symbols-outlined">payments</span></div>
+        <div class="feature-title">Harga Jujur & Transparan</div>
+        <div class="feature-desc">Tidak ada markup harga makanan dan biaya platform terselubung. Anda hanya membayar barang sesuai struk dan tarif jarak murni.</div>
+      </div>
+    </div>
+    
+    <div class="notice-card notice-green">
+      <span class="material-symbols-outlined">school</span>
+      <div>Platform ini terbuka untuk umum, tetapi diutamakan untuk mahasiswa UNNES dan keluarganya di sekitar Semarang. Buka dari jam <strong>05:00 - 21:00 WIB</strong>.</div>
+    </div>
+  </section>
+
+  <section class="doc-section" id="download">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">download</span> Instalasi</div>
+    <h2 class="sec-title">Dapatkan Aplikasi</h2>
+    <p class="sec-desc">Unduh aplikasi JastipUnnes di bawah ini dan mulai kemudahan memesan hari ini.</p>
+
+    <div class="app-download">
+      <div class="app-qr"><span class="material-symbols-outlined">qr_code_2</span></div>
+      <div style="flex:1;">
+        <div style="font-size: 20px; font-weight: 800; color: var(--black); letter-spacing: -0.5px;">Aplikasi JastipUnnes Beta</div>
+        <div style="font-size: 14px; font-weight: 600; color: var(--gray-500); margin: 4px 0 16px;">Web & Android · V.1.0</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn-primary" style="padding: 10px 20px; font-size: 14px;"><span class="material-symbols-outlined">android</span> Download APK</button>
+          <button class="btn-secondary" style="padding: 10px 20px; font-size: 14px;"><span class="material-symbols-outlined">open_in_new</span> Buka Web App</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="notice-card">
+      <span class="material-symbols-outlined">info</span>
+      <div>Versi saat ini masih <strong>Beta Release</strong>. Aplikasi resmi untuk Google Play Store sedang dalam tahap pengajuan rilis publik.</div>
+    </div>
+  </section>
+
+  <section class="doc-section" id="masalah">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">warning</span> Evaluasi</div>
+    <h2 class="sec-title">Apa yang Salah dengan Platform Delivery Umum?</h2>
+    <p class="sec-desc">Aplikasi pengiriman konvensional membebankan banyak biaya tersembunyi ke pelanggan dan memotong penghasilan driver besar-besaran.</p>
+
+    <div class="notice-card notice-red">
+      <span class="material-symbols-outlined">money_off</span>
+      <div>Tahukah Anda? Saat memesan melalui platform besar, Anda sebenarnya membayar <strong>empat lapis biaya tambahan</strong>, sementara driver hanya menerima pecahan kecil dari ongkos yang dibayar.</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="feature-card">
+        <div class="icon-wrap" style="color:var(--red);"><span class="material-symbols-outlined">price_change</span></div>
+        <div class="feature-title">Markup Makanan Hingga 25%</div>
+        <div class="feature-desc">Harga di platform sering dinaikkan secara tidak wajar dibandingkan membeli langsung ke toko, menyebabkan pesanan jauh lebih mahal.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon-wrap" style="color:var(--red);"><span class="material-symbols-outlined">receipt_long</span></div>
+        <div class="feature-title">PPN & Biaya Layanan</div>
+        <div class="feature-desc">Anda masih ditagih biaya layanan platform dan PPN di atas harga yang telah di-markup. Tagihan membengkak.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon-wrap" style="color:var(--red);"><span class="material-symbols-outlined">content_cut</span></div>
+        <div class="feature-title">Driver Dipotong 30%</div>
+        <div class="feature-desc">Dari nominal ongkir yang Anda bayar, platform akan memotong hingga 30%, merugikan driver yang telah bekerja keras.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc-section" id="solusi">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">verified</span> Solusi Platform</div>
+    <h2 class="sec-title">Mengapa Harus JastipUnnes?</h2>
+    <p class="sec-desc">Kami percaya pada sistem yang adil. Tidak ada pelanggan yang membayar terlalu mahal dan tidak ada driver yang haknya dipangkas.</p>
+
+    <div class="grid-2">
+      <div class="feature-card" style="border-color: var(--black);">
+        <div class="icon-wrap"><span class="material-symbols-outlined">person</span></div>
+        <div class="feature-title">Untuk Customer</div>
+        <div class="feature-desc">Harga makanan <strong>sama persis dengan harga aslinya</strong> di restoran/toko. Anda tidak dibebani biaya layanan dan tanpa PPN tersembunyi.</div>
+      </div>
+      <div class="feature-card" style="border-color: var(--black);">
+        <div class="icon-wrap"><span class="material-symbols-outlined">two_wheeler</span></div>
+        <div class="feature-title">Untuk Driver</div>
+        <div class="feature-desc"><strong>100% dari ongkos kirim</strong> masuk sepenuhnya ke kantong driver. Tidak ada potongan sepeser pun dari JastipUnnes.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc-section" id="perbandingan">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">compare_arrows</span> Transparansi</div>
+    <h2 class="sec-title">Perbandingan Biaya Nyata</h2>
+    <p class="sec-desc">Simulasi jika Anda memesan makanan seharga <strong>Rp 30.000</strong> dengan jarak tempuh pengantaran 3 KM.</p>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width: 40%">Rincian Biaya</th>
+            <th style="width: 30%">Platform Umum</th>
+            <th style="width: 30%">JastipUnnes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">Harga Makanan Asli</td>
+            <td>Rp 30.000</td>
+            <td>Rp 30.000</td>
+          </tr>
+          <tr>
+            <td class="col-name">Markup Harga di Aplikasi</td>
+            <td class="col-bad">+ Rp 7.500 (25%)</td>
+            <td class="col-good">+ Rp 0</td>
+          </tr>
+          <tr>
+            <td class="col-name">Biaya Layanan Platform</td>
+            <td class="col-bad">+ Rp 3.000</td>
+            <td class="col-good">+ Rp 0</td>
+          </tr>
+          <tr>
+            <td class="col-name">PPN (11%)</td>
+            <td class="col-bad">+ Rp 4.125</td>
+            <td class="col-good">+ Rp 0</td>
+          </tr>
+          <tr>
+            <td class="col-name">Ongkos Kirim</td>
+            <td class="col-bad">+ Rp 9.000</td>
+            <td class="col-good">+ Rp 11.000</td>
+          </tr>
+          <tr style="background: var(--gray-100);">
+            <td class="col-name" style="font-weight: 800;">Total Dibayar Customer</td>
+            <td class="col-bad" style="font-weight: 800; font-size:18px;">Rp 53.625</td>
+            <td class="col-good" style="font-weight: 800; font-size:18px;">Rp 41.000</td>
+          </tr>
+          <tr>
+            <td class="col-name"><strong>Driver Menerima Upah</strong></td>
+            <td class="col-bad">Rp 6.750 <em>(-25% dari ongkir)</em></td>
+            <td class="col-good">Rp 11.000 <em>(Utuh)</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="notice-card notice-green">
+      <span class="material-symbols-outlined">savings</span>
+      <div>Dalam simulasi ini, <strong>Customer berhemat hingga Rp 12.625</strong> untuk sekali jalan, dan di sisi lain, <strong>Driver menerima Rp 4.250 lebih banyak</strong>.</div>
+    </div>
+  </section>
+
+  <section class="doc-section" id="cara-pesan">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">list_alt</span> Panduan</div>
+    <h2 class="sec-title">Proses Pemesanan Mudah</h2>
+    <p class="sec-desc">Tidak ada yang rumit. Ikuti langkah sederhana ini untuk menyelesaikan pesanan Anda.</p>
+
+    <div class="timeline">
+      <div class="step-item">
+        <div class="step-dot">1</div>
+        <div>
+          <div class="step-title">Daftar Akun</div>
+          <div class="step-desc">Masuk menggunakan email atau akun Google. Lengkapi nama serta nomor WhatsApp agar driver mudah menghubungi.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot">2</div>
+        <div>
+          <div class="step-title">Pilih Jenis Layanan</div>
+          <div class="step-desc">Tentukan apakah ingin menggunakan Jastip Resto, Ambil Instan barang yang sudah lunas, atau Kirim barang.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot">3</div>
+        <div>
+          <div class="step-title">Tetapkan Titik Lokasi</div>
+          <div class="step-desc">Isi link lokasi dari Google Maps untuk tempat pengambilan, dan ketuk tombol GPS untuk menentukan alamat antaran.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot">4</div>
+        <div>
+          <div class="step-title">Cek Argo dan Buat Pesanan</div>
+          <div class="step-desc">Masukkan estimasi jarak. Total argo akan terkalkulasi otomatis secara jujur tanpa tambahan. Klik tombol "Buat Pesanan".</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"><span class="material-symbols-outlined" style="font-size:16px;">check</span></div>
+        <div>
+          <div class="step-title">Pesanan Diproses</div>
+          <div class="step-desc">Cek tab "Proses" untuk melihat status perjalanan. Anda juga bisa langsung chat dengan driver yang bertugas melalui WhatsApp.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc-section" id="driver">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">two_wheeler</span> Kemitraan</div>
+    <h2 class="sec-title">Daftar Menjadi Driver Kami</h2>
+    
+    <div class="card" style="background: var(--black); color: var(--white); margin: 24px 0; padding: 32px;">
+      <div style="font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px;">Ubah Waktu Luang Menjadi Pendapatan</div>
+      <p style="font-size: 15px; font-weight: 500; color: var(--gray-400); line-height: 1.6; margin-bottom: 24px; max-width: 600px;">
+        JastipUnnes tidak meminta potongan dari hasil kerjamu. Tidak ada target yang mengikat, sistem bagi hasil yang rumit, atau blokir sepihak. Ini adalah aplikasi komunitas untuk mahasiswa. 100% Ongkir adalah milikmu.
+      </p>
+      
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom: 32px;">
+        <div style="display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px;"><span class="material-symbols-outlined" style="color:var(--green);">check_circle</span> Tanpa Biaya Daftar</div>
+        <div style="display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px;"><span class="material-symbols-outlined" style="color:var(--green);">check_circle</span> Bebas Jam Kerja</div>
+        <div style="display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px;"><span class="material-symbols-outlined" style="color:var(--green);">check_circle</span> 0% Potongan</div>
+      </div>
+
+      <a href="https://wa.me/6285138238914?text=Halo+saya+ingin+daftar+sebagai+driver+JastipUnnes" target="_blank" class="btn-green">
+        <span class="material-symbols-outlined">chat</span> Daftar Cepat via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <section class="doc-section" id="nonprofit">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">volunteer_activism</span> Visi</div>
+    <h2 class="sec-title">Lebih dari Sekadar Bisnis</h2>
+    <p class="sec-desc">Kami dibangun dengan filosofi non-profit dan berorientasi pada kebermanfaatan sosial bagi ekosistem UMKM dan civitas akademika.</p>
+
+    <div class="card">
+      <div style="font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 8px;">Kolaborasi dengan FEB UNNES & ©RekanUsaha</div>
+      <p style="font-size: 14px; font-weight: 500; color: var(--gray-500); line-height: 1.6;">
+        Proyek ini diinisiasi oleh kelompok mahasiswa yang bosan dengan sistem pengeruk untung monopolis. Kami berkolaborasi dengan Fakultas Ekonomi Bisnis Universitas Negeri Semarang untuk menciptakan solusi digital yang berdampak nyata, memutus eksploitasi di industri logistik mikro.
+      </p>
+    </div>
+  </section>
+
+  <section class="doc-section" id="faq">
+    <div class="sec-label"><span class="material-symbols-outlined" style="font-size:16px;">help</span> Pusat Bantuan</div>
+    <h2 class="sec-title">FAQ JastipUnnes</h2>
+    
+    <div style="margin-top: 24px;">
+      <div class="faq-item">
+        <div class="faq-q">Bagaimana sistem pembayarannya berjalan?<span class="material-symbols-outlined">expand_more</span></div>
+        <div class="faq-a">Untuk pelanggan baru: harga barang di-transfer ke rekening/e-wallet driver terlebih dahulu. Ongkos kirim bisa bayar COD. Namun, bila sudah pernah order 1x (terdaftar sebagai langganan tepercaya), semua pembayaran bisa dilakukan full COD saat barang tiba.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Apakah saya bisa order makanan dari mana saja?<span class="material-symbols-outlined">expand_more</span></div>
+        <div class="faq-a">Ya! Selama warung atau toko tersebut ada di Google Maps, sertakan linknya dan beritahu apa yang ingin dibeli melalui kolom deskripsi. Driver kami akan meluncur ke lokasi.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Siapa saja yang bisa memakai platform ini?<span class="material-symbols-outlined">expand_more</span></div>
+        <div class="faq-a">Meskipun ditargetkan untuk lingkungan mahasiswa UNNES Sekaran, warga sekitar Semarang tetap bisa menggunakan layanan kami selama masih ada cakupan driver.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Kenapa tidak ada PPN atau Biaya Layanan?<span class="material-symbols-outlined">expand_more</span></div>
+        <div class="faq-a">Karena kami beroperasi sebagai sarana platform komunitas (bukan perusahaan multinasional). Tujuan kami menghubungkan customer dan driver secara langsung, bukan menumpuk profit perusahaan.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div>
+    <div class="footer-brand">Jastip<span>Unnes</span></div>
+    <div class="footer-copy">© 2024 RekanUsaha × Fakultas Ekonomi Bisnis UNNES.<br>Dokumentasi & Aplikasi Proyek Komunitas Mahasiswa.</div>
+  </div>
+  <div style="display:flex; gap:12px; flex-wrap:wrap;">
+    <a href="https://wa.me/6285138238914" target="_blank" class="btn-secondary" style="padding: 10px 16px; font-size: 13px;">Hubungi Admin</a>
+    <a href="#driver" class="btn-primary" style="padding: 10px 16px; font-size: 13px;">Daftar Driver</a>
+  </div>
+</footer>
+
+<script>
+  const sidebarItems = document.querySelectorAll('.sidebar-item');
+  const sections = document.querySelectorAll('.doc-section');
+  const overlay = document.getElementById('sidebar-overlay');
+  const sidebar = document.getElementById('sidebar');
+  const hamburger = document.getElementById('hamburger');
+
+  // Sidebar Scroll Spy
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        sidebarItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('data-target') === entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Sidebar Click
+  sidebarItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const el = document.getElementById(item.getAttribute('data-target'));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+      }
+    });
+  });
+
+  // Mobile Menu
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  });
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
